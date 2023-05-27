@@ -50,3 +50,10 @@ list-style: none;
   display: flex;
   justify-content: space-between;
 }
+.filter-btn{
+  background-color: black;
+  color: #fff;
+  margin-top: 1%;
+  margin-left: 1.5%;
+  width: 15%;
+}
