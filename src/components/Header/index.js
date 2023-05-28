@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from '../../assests/logo/banner-image.jpg' 
-const index = () => {
+const Index = () => {
+  const [isClicked,setIsclicked] = useState(false)
   return (
     <>
       <div className="header-container">
@@ -17,6 +18,7 @@ const index = () => {
             <li>Sign In</li>
             <li>Cart (0)</li>
             <li>Contact</li>
+            <button className="login-btn" onClick={()=>setIsclicked(!isClicked)}> {!isClicked ? 'Login' : 'Logout'}</button>
           </ul>
         </div>
       </div>
@@ -24,4 +26,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
