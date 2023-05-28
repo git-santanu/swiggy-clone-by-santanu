@@ -11,6 +11,7 @@
 # production
 /build
 src/utils
+src/assests/constant
 
 # misc
 .DS_Store

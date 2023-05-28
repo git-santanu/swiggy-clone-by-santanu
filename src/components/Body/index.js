@@ -1,21 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import BodyCards from "../BodyCards";
 import cardItems from "../../utils/Api";
-const index = () => {
+import getData from "../../utils/api/getData";
+import { useEffect } from "react";
+const Index = () => {
+  const [restroList,setRestroList]= useState([]);
+
+  useEffect(()=>{
+    fetchData();
+    return()=>{
+      fetchData()
+    }
+  },[])
+
+  const fetchData = ()=>{
+    const data = getData
+    setRestroList(data[0].data.cards[2].data.data.cards)
+  }
+  
   return (
     <>
       <div className="body">
         <div className="filter">
-          <button className="filter-btn" >Top Rated Restraurants</button>
+          <button className="filter-btn" onClick={()=>alert('fjj')}>Top Rated Restraurants</button>
         </div>
         <div className="card-container">
-          {cardItems.map((card, id) => {
-            return <BodyCards key={card.id} cardData={card} />;
+          {restroList.map((card, id) => {
+            console.log(card)
+            return <BodyCards key={card.data.id} cardData={card} />;
           })}
-        </div>
+        </div>  
       </div>
     </>
   );
 };
 
-export default index;
+export default Index;
