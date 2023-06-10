@@ -6,7 +6,7 @@ const Shimmer = () => {
       {[1,2,3,4].map((item, index) => {
         return (
           <>
-            <div className="shimmer-card" key={index}></div>
+            <h6 className="shimmer-card" key={index}>loading...</h6>
           </>
         );
       })}

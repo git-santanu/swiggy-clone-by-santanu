@@ -83,3 +83,13 @@
   padding: 0 20px;
   cursor: pointer;
 }
+.search{
+  margin-top: 1%;
+}
+.filter{
+  display: flex;
+  margin-left: 1.5%;
+}
+.serach-btn{
+  cursor: pointer;
+}
