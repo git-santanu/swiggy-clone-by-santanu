@@ -1,36 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BodyCards from "../BodyCards";
 import getData from "../../utils/api/getData";
-import { useEffect } from "react";
 // import Shimmer from "../fakeCards";
 
 const Index = () => {
   const [restroList, setRestroList] = useState([]);
-  const [filteredRestro,setFilteredRestro]= useState([])
-  const [searchText, setSearchText] = useState('');
+  const [filteredRestro, setFilteredRestro] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
-    return () => {fetchData()};
+    return () => {
+      fetchData();
+    };
   }, []);
 
   const fetchData = () => {
     const data = getData;
     setRestroList(data[0]?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestro(data[0]?.data?.cards[2]?.data?.data?.cards)
+    setFilteredRestro(data[0]?.data?.cards[2]?.data?.data?.cards);
   };
- 
+
   const topRatedRestroHandle = () => {
     const data = restroList.filter((i) => i.data.avgRating > 4);
-    setRestroList(data);
+    setFilteredRestro(data);
   };
-  const searchRestroHandler=()=>{
-    const data = restroList.filter((i) => {return i.data.name.toLowerCase().includes(searchText.toLowerCase())});
-    setFilteredRestro(data)
-  }
-  const textChangeHandler = (e)=>{
+  const searchRestroHandler = () => {
+    const data = restroList.filter((i) => {
+      return i.data.name.toLowerCase().includes(searchText.toLowerCase());
+    });
+    setFilteredRestro(data);
+  };
+  const textChangeHandler = (e) => {
+    const searchData = e.target.value;
+    let data = getData;
+    if (searchData.length === 0) {
+      setFilteredRestro(data[0]?.data?.cards[2]?.data?.data?.cards);
+    }
     setSearchText(e.target.value);
-  }
+  };
   return restroList.length === 0 ? (
     <h3>Data not found...!</h3>
   ) : (
@@ -43,7 +51,7 @@ const Index = () => {
               className="search-box"
               name="searchText"
               value={searchText}
-              onChange={(e)=>textChangeHandler(e)}
+              onChange={(e) => textChangeHandler(e)}
             />
             <button className="serach-btn" onClick={searchRestroHandler}>
               Search
