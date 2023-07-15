@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BodyCards from "../BodyCards";
 import getData from "../../utils/api/getData";
+import { Link } from "react-router-dom";
 // import Shimmer from "../fakeCards";
 
 const Index = () => {
@@ -22,11 +23,11 @@ const Index = () => {
   };
 
   const topRatedRestroHandle = () => {
-    const data = restroList.filter((i) => i.data.avgRating > 4);
+    const data = restroList.filter(i => i.data.avgRating > 4);
     setFilteredRestro(data);
   };
   const searchRestroHandler = () => {
-    const data = restroList.filter((i) => {
+    const data = restroList.filter(i => {
       return i.data.name.toLowerCase().includes(searchText.toLowerCase());
     });
     setFilteredRestro(data);
@@ -39,7 +40,7 @@ const Index = () => {
     }
     setSearchText(e.target.value);
   };
-  return restroList.length === 0 ? (
+  return filteredRestro.length === 0 ? (
     <h3>Data not found...!</h3>
   ) : (
     <>
@@ -63,7 +64,7 @@ const Index = () => {
         </div>
         <div className="card-container">
           {filteredRestro.map((card, index) => {
-            return <BodyCards key={card.data.id} cardData={card} />;
+            return <Link key={card.data.id} to={'/restaurants/'+ card.data.id}> <BodyCards cardData={card} /></Link>;
           })}
         </div>
       </div>

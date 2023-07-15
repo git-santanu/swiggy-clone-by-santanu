@@ -44,7 +44,6 @@
   display: flex;
   flex-wrap: wrap;
   background-color: #fff;
-  /* border: 1px solid black; */
 }
 
 .card-wrap:hover {
@@ -92,4 +91,7 @@
 }
 .serach-btn{
   cursor: pointer;
+}
+.header-links{
+  text-decoration: none;
 }
