@@ -1,0 +1,2 @@
+{/* return <Link key={card.data.id} to={'/restaurants/'+ card.data.id}> <BodyCards cardData={card} /></Link>; */}
+/* Body card-container*/

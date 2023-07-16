@@ -1,8 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import fetchMenus from "../../utils/api/fetchMenus";
+import {useLocation} from 'react-router-dom';
 
 const RestroMenu = () => {
+  const location = useLocation();
+  const {name,cuisines,costForTwoString} = location.state;
 
   const [menuInfo, setMenuInfo] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
@@ -21,13 +24,13 @@ const RestroMenu = () => {
 
   if (menuInfo === null) return <h2>No data found!</h2>;
 
-  const { name, cuisines, costForTwoMessage } = menuInfo[0]?.data?.cards[0]?.card?.card?.info;
+  // const { name, cuisines, costForTwoMessage } = menuInfo[0]?.data?.cards[0]?.card?.card?.info;
 
   return (
     <div className="menu">
       <h2>Name of the Restaurant: {name} </h2>
       <h3>
-        {cuisines.join(", ")} - {costForTwoMessage}
+        {cuisines.join(", ")} - {costForTwoString}
       </h3>
       <ul>
         {menuItems.map((item) => {

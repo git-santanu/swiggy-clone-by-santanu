@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import BodyCards from "../BodyCards";
 import getData from "../../utils/api/getData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 // import Shimmer from "../fakeCards";
 
 const Index = () => {
   const [restroList, setRestroList] = useState([]);
   const [filteredRestro, setFilteredRestro] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const router = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -40,6 +42,10 @@ const Index = () => {
     }
     setSearchText(e.target.value);
   };
+  const cardPressHandler = (cardItems) =>{
+   const {id,name,cuisines,costForTwoString} = cardItems?.data;
+   router(`/restaurants/${id}`,{replace: true, state: {name,cuisines,costForTwoString} })
+  }
   return filteredRestro.length === 0 ? (
     <h3>Data not found...!</h3>
   ) : (
@@ -64,7 +70,7 @@ const Index = () => {
         </div>
         <div className="card-container">
           {filteredRestro.map((card, index) => {
-            return <Link key={card.data.id} to={'/restaurants/'+ card.data.id}> <BodyCards cardData={card} /></Link>;
+            return  <div onClick={()=>cardPressHandler(card)} key={card.data.id}><BodyCards cardData={card} /></div>
           })}
         </div>
       </div>
