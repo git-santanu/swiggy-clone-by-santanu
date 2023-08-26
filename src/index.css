@@ -95,3 +95,12 @@
 .header-links{
   text-decoration: none;
 }
+
+.promoted-class{
+  position: absolute;
+  background-color: black;
+  color: #fff;
+  border-radius: '20px';
+  margin-left: '25px';
+  padding: '5px';
+}

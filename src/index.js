@@ -1,39 +1,44 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./components/Error";
-import Body from './components/Body';
+import Body from "./components/Body";
 import Contact from "./components/Contact";
 import RestroMenu from "./components/RestroMenu";
+
+const Cabs = lazy(() => import("./components/Cabs")); // lazy loading
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children:[
-      { 
+    children: [
+      {
         path: "/",
-        element: <Body />
+        element: <Body />,
       },
       {
-        path: '/contact',
-        element: <Contact />
+        path: "/contact",
+        element: <Contact />,
       },
       {
-        path:'/restaurants/:resId',
-        element: <RestroMenu/>
-      }
+        path: "/cabs",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Cabs />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/restaurants/:resId",
+        element: <RestroMenu />,
+      },
     ],
     errorElement: <Error />,
-  }
+  },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

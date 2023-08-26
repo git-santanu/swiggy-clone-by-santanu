@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BodyCards from "../BodyCards";
 import getData from "../../utils/api/getData";
-import { Link, useNavigate  } from "react-router-dom";
-// import Shimmer from "../fakeCards";
+import { useNavigate } from "react-router-dom";
+import withPromotedCard from "../../utils/restraurant-helper";
 
 const Index = () => {
   const [restroList, setRestroList] = useState([]);
@@ -10,6 +10,8 @@ const Index = () => {
   const [searchText, setSearchText] = useState("");
 
   const router = useNavigate();
+
+  const GetPromotedCards = withPromotedCard(BodyCards);
 
   useEffect(() => {
     fetchData();
@@ -25,15 +27,17 @@ const Index = () => {
   };
 
   const topRatedRestroHandle = () => {
-    const data = restroList.filter(i => i.data.avgRating > 4);
+    const data = restroList.filter((i) => i.data.avgRating > 4);
     setFilteredRestro(data);
   };
+
   const searchRestroHandler = () => {
-    const data = restroList.filter(i => {
+    const data = restroList.filter((i) => {
       return i.data.name.toLowerCase().includes(searchText.toLowerCase());
     });
     setFilteredRestro(data);
   };
+
   const textChangeHandler = (e) => {
     const searchData = e.target.value;
     let data = getData;
@@ -42,10 +46,15 @@ const Index = () => {
     }
     setSearchText(e.target.value);
   };
-  const cardPressHandler = (cardItems) =>{
-   const {id,name,cuisines,costForTwoString} = cardItems?.data;
-   router(`/restaurants/${id}`,{replace: true, state: {name,cuisines,costForTwoString} })
-  }
+
+  const cardPressHandler = (cardItems) => {
+    const { id, name, cuisines, costForTwoString } = cardItems?.data;
+    router(`/restaurants/${id}`, {
+      replace: true,
+      state: { name, cuisines, costForTwoString },
+    });
+  };
+
   return filteredRestro.length === 0 ? (
     <h3>Data not found...!</h3>
   ) : (
@@ -69,8 +78,16 @@ const Index = () => {
           </button>
         </div>
         <div className="card-container">
-          {filteredRestro.map((card, index) => {
-            return  <div onClick={()=>cardPressHandler(card)} key={card.data.id}><BodyCards cardData={card} /></div>
+          {filteredRestro.map((card) => {
+            return (
+              <div onClick={() => cardPressHandler(card)} key={card.data.id}>
+                {card.data.promoted ? (
+                  <GetPromotedCards cardData={card}/>
+                ) : (
+                  <BodyCards cardData={card} />
+                )}
+              </div>
+            );
           })}
         </div>
       </div>

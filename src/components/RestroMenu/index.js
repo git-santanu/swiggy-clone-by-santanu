@@ -1,31 +1,14 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import fetchMenus from "../../utils/api/fetchMenus";
 import {useLocation} from 'react-router-dom';
+import useRestroMenu from "../../utils/useRestroMenu";
 
 const RestroMenu = () => {
   const location = useLocation();
   const {name,cuisines,costForTwoString} = location.state;
 
-  const [menuInfo, setMenuInfo] = useState(null);
-  const [menuItems, setMenuItems] = useState([]);
-
-  useEffect(() => {
-    getMenusList();
-  }, []);
-
-  const getMenusList = () => {
-    const data = fetchMenus;
-    setMenuInfo(data);
-    const findMenuItems = data[0]?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1].card?.card?.itemCards;
-    const menuData_ = findMenuItems.map(item => {return item.card.info});
-    setMenuItems(menuData_);
-  };
-
+  const menuInfo = useRestroMenu();  //using custom hook
+  
   if (menuInfo === null) return <h2>No data found!</h2>;
-
-  // const { name, cuisines, costForTwoMessage } = menuInfo[0]?.data?.cards[0]?.card?.card?.info;
-
   return (
     <div className="menu">
       <h2>Name of the Restaurant: {name} </h2>
@@ -33,7 +16,7 @@ const RestroMenu = () => {
         {cuisines.join(", ")} - {costForTwoString}
       </h3>
       <ul>
-        {menuItems.map((item) => {
+        {menuInfo.map((item) => {
           const { id, name } = item;
           return (
             <div key={id}>
@@ -45,5 +28,4 @@ const RestroMenu = () => {
     </div>
   );
 };
-
 export default RestroMenu;
