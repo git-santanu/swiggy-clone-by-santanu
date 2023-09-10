@@ -28,9 +28,6 @@
   margin: 10px;
 }
 
-.search {
-  margin-top: 10px;
-}
 
 .card-wrap {
   padding: 37px;
@@ -54,16 +51,54 @@
 .card-img {
   width: 100%;
 }
-
+.itemlist_img{
+  width: 50%;
+}
 .card-bottom {
   display: flex;
   justify-content: space-between;
 }
-
+.itemlist_display{
+  display: flex;
+  justify-content: space-between;
+}
+.menu {
+  text-align: center;
+}
+.menu-restro-name {
+font-weight: bold;
+margin-top: 40px;
+}
+.itemlist{
+margin: 2px;
+padding: 2px;
+}
+.itemlist_description{
+  font-size: 13px;
+}
+.accordian {
+  width: 50%;
+  background-color: rgba(156, 144, 144, 0.151);
+  padding: 10px;
+  margin: 15px auto;
+  align-items: center;
+  box-shadow: 4px 4px rgb(196, 195, 195);
+  border-radius: 12px;
+}
+.accordian-child{
+  display: flex;
+  justify-content: space-between;
+}
+.accordian-title{
+  font-weight: 900;
+  font-size: medium;
+}
 .filter-btn {
-  background-color: rgb(238, 58, 58);
+  background-color: rgb(19, 18, 18);
   color: #fff;
-  margin-top: 1%;
+  margin: 28px;
+  padding: 5px;
+  width: 15%;
   margin-left: 1.5%;
   cursor: pointer;
 }
@@ -79,18 +114,29 @@
   height: 300px;
 }
 .login-btn{
-  padding: 0 20px;
+  padding: 5px;
+  height: 50px;
+  border-radius: 13px;
   cursor: pointer;
+  margin-top: 5px;
 }
 .search{
-  margin-top: 1%;
+  margin: 30px;
+}
+.search-box{
+  padding: 6px;
 }
 .filter{
   display: flex;
   margin-left: 1.5%;
 }
-.serach-btn{
+.search-btn{
   cursor: pointer;
+  margin-left: 10px;
+  padding: 6px;
+  width: 90px;
+  background-color: black;
+  color: aliceblue;
 }
 .header-links{
   text-decoration: none;
