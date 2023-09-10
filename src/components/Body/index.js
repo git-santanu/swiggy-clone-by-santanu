@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import BodyCards from "../BodyCards";
 import getData from "../../utils/api/getData";
 import { useNavigate } from "react-router-dom";
 import withPromotedCard from "../../utils/restraurant-helper";
+import userContext from "../../utils/userContext";
 
 const Index = () => {
   const [restroList, setRestroList] = useState([]);
@@ -19,6 +20,8 @@ const Index = () => {
       fetchData();
     };
   }, []);
+
+  const {loggedInUser, setUserName} = useContext(userContext)
 
   const fetchData = () => {
     const data = getData;
@@ -67,15 +70,25 @@ const Index = () => {
               className="search-box"
               name="searchText"
               value={searchText}
+              placeholder="Search foods here"
               onChange={(e) => textChangeHandler(e)}
             />
-            <button className="serach-btn" onClick={searchRestroHandler}>
+            <button className="search-btn" onClick={searchRestroHandler}>
               Search
             </button>
           </div>
           <button className="filter-btn" onClick={topRatedRestroHandle}>
             Top Rated Restraurants
           </button>
+          <div className="search">
+           <label style={{fontWeight:'bold'}}>User name: </label>
+            <input
+              type="text"
+              className="search-box"
+              value={loggedInUser}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
         </div>
         <div className="card-container">
           {filteredRestro.map((card) => {
