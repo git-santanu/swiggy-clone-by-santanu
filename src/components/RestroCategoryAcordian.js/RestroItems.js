@@ -1,6 +1,18 @@
+import { useDispatch } from "react-redux";
 import img_url from "../../assests/constant";
+import { addToCart, removeFromCart } from "../../utils/store/slice/cartSlice";
 
-const RestroItems = ({ itemCards }) => {
+const RestroItems = ({ itemCards, showAddButton }) => {
+
+  const dispacthItem = useDispatch();
+
+  const handleAddToCart = (item) => {
+    dispacthItem(addToCart(item));
+  };
+  const handleRemoveFromCart = (item) => {
+    dispacthItem(removeFromCart(item));
+  };
+
   return (
     <>
       {itemCards.map((item, index) => (
@@ -38,6 +50,26 @@ const RestroItems = ({ itemCards }) => {
                 src={img_url + item.card.info.imageId}
                 alt="img"
               />
+              {
+                showAddButton ? 
+                <div
+                style={{
+                  marginBottom: "5px",
+                }}
+              >
+                <button
+                  style={{
+                    padding: "8px",
+                    backgroundColor: "white",
+                    margin: "15px",
+                    borderRadius: "15px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleAddToCart(item)}
+                >
+                  Add +
+                </button>
+              </div> :
               <div
                 style={{
                   marginBottom: "5px",
@@ -51,10 +83,12 @@ const RestroItems = ({ itemCards }) => {
                     borderRadius: "15px",
                     cursor: "pointer",
                   }}
+                  onClick={() => handleRemoveFromCart(item)}
                 >
-                  Add +
+                  Remove -
                 </button>
               </div>
+              }
             </div>
           </div>
           {index === itemCards.length - 1 ? null : <hr />}

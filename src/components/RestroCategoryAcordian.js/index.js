@@ -4,11 +4,11 @@ const RestroCategoryAcordian = ({
   data,
   isHeaderClicked,
   setShowIndex,
-  toggleCard,
+  // toggleCard,
 }) => {
   const handleAccordianView = () => {
     setShowIndex();
-    toggleCard();
+    // toggleCard();
   };
 
   return (
@@ -24,7 +24,7 @@ const RestroCategoryAcordian = ({
           </span>
           <span>🔽</span>
         </div>
-        {isHeaderClicked && <RestroItems itemCards={data.itemCards} />}
+        {isHeaderClicked && <RestroItems itemCards={data.itemCards} showAddButton={true} />}
       </div>
     </>
   );
