@@ -19,13 +19,13 @@ const RestroMenu = () => {
   );
 
   // Function to toggle the card when it's clicked
-  const toggleCard = (index) => {
-    if (showIndex === index) {
-      setShowIndex(null); // Close the currently open card if it's clicked again
-    } else {
-      setShowIndex(index); // Open the clicked card
-    }
-  };
+  // const toggleCard = (index) => {
+  //   if (showIndex === index) {
+  //     setShowIndex(null); // Close the currently open card if it's clicked again
+  //   } else {
+  //     setShowIndex(index); // Open the clicked card
+  //   }
+  // };
 
   if (menuInfo.length <= 0) return <h2>No data found!</h2>;
   return (
@@ -41,7 +41,7 @@ const RestroMenu = () => {
           data={category?.card?.card}
           isHeaderClicked={index === showIndex ? true : false} // lifting state up
           setShowIndex={() => setShowIndex(index)} // lifting state up
-          toggleCard={() => toggleCard(index)} // lifting state up
+          // toggleCard={() => toggleCard(index)} // lifting state up
         />
       ))}
     </div>

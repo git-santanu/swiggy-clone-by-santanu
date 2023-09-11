@@ -3,13 +3,14 @@ import logo from "../../assests/logo/banner-image.jpg";
 import { Link } from "react-router-dom";
 import useActiveStatus from "../../utils/useActiveStatus";
 import userContext from "../../utils/userContext";
+import { useSelector } from "react-redux";
 
 const Index = () => {
-
   const [isClicked, setIsclicked] = useState(false);
 
   const activeStatus = useActiveStatus();
-  const {loggedInUser} = useContext(userContext);
+  const { loggedInUser } = useContext(userContext);
+  const cartSelector = useSelector((store) => store.cart.items);
 
   return (
     <>
@@ -21,18 +22,30 @@ const Index = () => {
           <ul>
             <li>
               {" "}
-              <Link to="/" className="header-links">Home</Link>
+              <Link to="/" className="header-links">
+                Home
+              </Link>
             </li>
             <li>Sign In</li>
-            <li>Cart (0)</li>
-            <li>  
-              <Link to="/contact" className="header-links">Contact</Link>
+            <li style={{ fontWeight: "bold", cursor: "pointer" }}>
+              <Link to="/cart" className="header-links">
+                Cart ({cartSelector.length})
+              </Link>
             </li>
-            <li>  
-              <Link to="/cabs" className="header-links">Cabs</Link>
+            <li>
+              <Link to="/contact" className="header-links">
+                Contact
+              </Link>
             </li>
-            <li>  
-              <Link className="header-links">{loggedInUser} {activeStatus ? '🟢': '🔴'}</Link>
+            <li>
+              <Link to="/cabs" className="header-links">
+                Cabs
+              </Link>
+            </li>
+            <li>
+              <Link className="header-links">
+                {loggedInUser} {activeStatus ? "🟢" : "🔴"}
+              </Link>
             </li>
             <button
               className="login-btn"

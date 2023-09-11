@@ -8,6 +8,7 @@ import Error from "./components/Error";
 import Body from "./components/Body";
 import Contact from "./components/Contact";
 import RestroMenu from "./components/RestroMenu";
+import Cart from "./components/Cart";
 
 const Cabs = lazy(() => import("./components/Cabs")); // lazy loading
 
@@ -31,6 +32,10 @@ const routes = createBrowserRouter([
             <Cabs />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/restaurants/:resId",
