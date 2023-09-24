@@ -4,7 +4,6 @@ import { clearCart } from "../../utils/store/slice/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
-
   const dispacthItem = useDispatch();
   const handleClearCart = () => {
     dispacthItem(clearCart());
@@ -37,10 +36,17 @@ const Cart = () => {
           }}
           onClick={() => handleClearCart()}
         >
-          Clear Cart
+         {cartItems.length > 0 ? 'Clear Cart': 'Cart is empty! please add some item'} 
         </button>
       </div>
-      <RestroItems itemCards={cartItems} />
+      <div
+        style={{
+          margin: '15px auto',
+          width: '50%'
+        }}
+      >
+        <RestroItems itemCards={cartItems} />
+      </div>
     </>
   );
 };
