@@ -9,8 +9,8 @@ const RestroItems = ({ itemCards, showAddButton }) => {
   const handleAddToCart = (item) => {
     dispacthItem(addToCart(item));
   };
-  const handleRemoveFromCart = (item) => {
-    dispacthItem(removeFromCart(item));
+  const handleRemoveFromCart = (idx) => {
+    dispacthItem(removeFromCart(idx));
   };
 
   return (
@@ -83,7 +83,7 @@ const RestroItems = ({ itemCards, showAddButton }) => {
                     borderRadius: "15px",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleRemoveFromCart(item)}
+                  onClick={() => handleRemoveFromCart(index)}
                 >
                   Remove -
                 </button>
