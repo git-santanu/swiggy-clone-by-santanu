@@ -8,11 +8,6 @@
 # testing
 /coverage
 
-# production
-/build
-src/utils/api
-src/assests/constant
-
 # misc
 .DS_Store
 .env.local
