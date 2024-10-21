@@ -5,9 +5,6 @@ const appStore = configureStore({
    reducer: { // global reducer of the main store
     cart: cartSlice // specific reducers are coming here via this slice
    },
-   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }), 
+   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false}), 
 })
 export default appStore;
